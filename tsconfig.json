@@ -1,0 +1,13 @@
+{
+  "include": ["src"],
+  "exclude": ["tests"],
+  "compilerOptions": {
+    "lib": ["ES2020","dom"],
+    "moduleResolution": "node",
+    "module": "ES2020",
+    "outDir": "pkg",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "sourceMap": true
+  },
+}
