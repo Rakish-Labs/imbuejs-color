@@ -79,8 +79,6 @@ export default class Color implements IColor {
     }
   }
 
-  hsl() {}
-
   toString() {
     return this.originalValue
   }
