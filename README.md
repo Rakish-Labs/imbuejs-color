@@ -24,10 +24,6 @@ const rebeccaPurpleRGB = instance.rgb() // Color {...}
 /** Output */
 const rebeccaPurple = rebeccaPurpleRGB.toString() // 'rgb(102, 51, 153)'
 ```
-This returns an instance of the Color class. The color transformations listed below also return an instance of the class.
-
-Once transformed, the `toString()` method may be chained on to get the converted color string.
-
 
 #### Color Space Tranformations
 Color space transformations transform a representation of a color in one color space to a representation in another color space (hexadecimal to RGB, for example.
