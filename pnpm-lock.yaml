@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   c8: ^7.7.3
   codecov: ^3.8.2
+  esbuild: ^0.12.15
   nodemon: ^2.0.12
   rimraf: ^3.0.2
   rollup: ^2.53.1
@@ -14,10 +15,11 @@ specifiers:
 devDependencies:
   c8: 7.7.3
   codecov: 3.8.2
+  esbuild: 0.12.15
   nodemon: 2.0.12
   rimraf: 3.0.2
   rollup: 2.53.1
-  rollup-plugin-esbuild: 4.5.0_rollup@2.53.1
+  rollup-plugin-esbuild: 4.5.0_esbuild@0.12.15+rollup@2.53.1
   ts-node: 10.1.0_typescript@4.3.5
   typescript: 4.3.5
   uvu: 0.5.1
@@ -407,6 +409,12 @@ packages:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
     dependencies:
       once: 1.4.0
+    dev: true
+
+  /esbuild/0.12.15:
+    resolution: {integrity: sha512-72V4JNd2+48eOVCXx49xoSWHgC3/cCy96e7mbXKY+WOWghN00cCmlGnwVLRhRHorvv0dgCyuMYBZlM2xDM5OQw==}
+    hasBin: true
+    requiresBuild: true
     dev: true
 
   /escalade/3.1.1:
@@ -975,7 +983,7 @@ packages:
       glob: 7.1.7
     dev: true
 
-  /rollup-plugin-esbuild/4.5.0_rollup@2.53.1:
+  /rollup-plugin-esbuild/4.5.0_esbuild@0.12.15+rollup@2.53.1:
     resolution: {integrity: sha512-ieUd3AoYWsN6Tfp0LBNnC+QpdhKjDEaH4NK3ghuEXOH56/7TAtD+hMbD9vSWZgsGSbaqCkrn4j6PaUj1vOSt1g==}
     engines: {node: '>=12'}
     peerDependencies:
@@ -983,6 +991,7 @@ packages:
       rollup: ^1.20.0 || ^2.0.0
     dependencies:
       '@rollup/pluginutils': 4.1.0_rollup@2.53.1
+      esbuild: 0.12.15
       joycon: 3.0.1
       jsonc-parser: 3.0.0
       rollup: 2.53.1

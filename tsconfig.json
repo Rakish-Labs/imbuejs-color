@@ -2,7 +2,7 @@
   "include": ["src", "tests/isValidHex.test.ts", "tests/rgbToHex.test.ts"],
   "exclude": ["tests"],
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ES6",
     "lib": ["ES2020","dom"],
     "moduleResolution": "node",
     "module": "ES2020",
