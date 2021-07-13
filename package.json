@@ -6,12 +6,11 @@
     ".": "./index.js",
     "./package.json": "./package.json"
   },
-  "type": "module",
   "types": "pkg/index.d.ts",
   "scripts": {
     "clean": "rimraf pkg",
-    "test": "node --experimental-loader esbuild-node-loader ./node_modules/uvu/bin.js tests",
-    "test:ci": "node --experimental-loader esbuild-node-loader ./node_modules/uvu/bin.js src .test.js",
+    "test": "uvu -r ts-node/register tests",
+    "test:coverage": "c8 npm run test",
     "test:watch": "nodemon -L -e js,ts,json --config nodemon.test.json --exec 'clear && npm run test'",
     "declarations": "tsc --outDir ./pkg --declaration",
     "build": "npm run clean && rollup -c rollup.config.js && pnpm declarations",
@@ -28,18 +27,12 @@
   "author": "jeffDevelops",
   "license": "MIT",
   "devDependencies": {
-    "@istanbuljs/esm-loader-hook": "^0.1.2",
     "c8": "^7.7.3",
-    "cross-env": "^7.0.3",
-    "esbuild": "^0.12.15",
-    "esbuild-node-loader": "^0.1.1",
-    "esm": "^3.2.25",
-    "esm-loader-chaining-polyfill": "^0.1.1",
     "nodemon": "^2.0.12",
-    "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.53.1",
     "rollup-plugin-esbuild": "^4.5.0",
+    "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
     "uvu": "^0.5.1"
   }
