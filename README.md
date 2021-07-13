@@ -197,7 +197,7 @@ Don't see a color space transformation you need? Don't see a visual color transf
 Something not working the way you expect? Have a usage question? [Open up an issue.](https://github.com/Rakish-Labs/imbuejs-color/issues/new?assignees=&labels=&template=bug_report.md&title=)
 
 ## AMA
-Have a question about how to use the library? 
+Have a question about how to use the library? This is a safe space! No question is too naïve, specific, broad, or esoteric, and no question is dumb! [AMA!](https://github.com/Rakish-Labs/imbuejs-color/issues/new?assignees=jeffDevelops&labels=question&template=question.md&title=%5BQUESTION%5D)
 
 ## Roadmap
 In planned order of implementation based on browser support:
