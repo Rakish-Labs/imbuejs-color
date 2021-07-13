@@ -4,14 +4,6 @@
 name: Node.js Package
 
 on:
-  push:
-
-
-    steps:
-      - uses: actions/checkout@v2
-
-
-on:
   release:
     types: [published]
     tags:
