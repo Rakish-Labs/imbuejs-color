@@ -12,6 +12,13 @@ colorClass('maintains the originally passed value', () => {
   assert.equal(color.toString(), '#000000')
 })
 
+colorClass('accepts an instance of itself as argument', () => {
+  const color = new Color('#000000')
+  const anotherColor = new Color(color)
+
+  assert.equal(anotherColor.hex().toString(), '#000000')
+})
+
 colorClass('converts hexadecimal to rgb', () => {
   const inputs = [
     /** 6 Digit Hex */
@@ -100,8 +107,13 @@ colorClass('converts hsl to rgb(a)', () => {
     'hsl(340 59.8% 64.9%)',
     'hsla(0, 0%, 0%, .5)',
     'hsla(0, 0%, 0%, 50%)',
+    'hsla(0deg, 0%, 0%, 50%)',
     'hsl(3.141592653589793rad, 100.0%, 74.1%)', // π radians === 180º
     'hsl(3.141592653589793rad 100.0% 74.1%)', // π radians === 180º
+    'hsl(61 100.0% 74.1%)',
+    'hsl(121 100.0% 74.1%)',
+    'hsl(241 100.0% 74.1%)',
+    'hsl(1turn 100% 90%)',
   ]
 
   const expectedValues = [
@@ -113,8 +125,13 @@ colorClass('converts hsl to rgb(a)', () => {
     'rgb(219, 111, 147)',
     'rgba(0, 0, 0, .5)',
     'rgba(0, 0, 0, 50%)',
+    'rgba(0, 0, 0, 50%)',
     'rgb(122, 255, 255)',
     'rgb(122, 255, 255)',
+    'rgb(252, 255, 122)',
+    'rgb(122, 255, 125)',
+    'rgb(125, 122, 255)',
+    'rgb(255, 204, 204)',
   ]
 
   expectedValues.forEach((expected: string, index: number) => {

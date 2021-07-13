@@ -1,5 +1,5 @@
 {
-  "include": ["src"],
+  "include": ["src", "tests/isValidHex.test.ts", "tests/rgbToHex.test.ts"],
   "exclude": ["tests"],
   "compilerOptions": {
     "target": "ES5",
