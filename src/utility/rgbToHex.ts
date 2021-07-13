@@ -17,6 +17,8 @@ export const rgbToHex = (rgb: string) => {
       : /** Alpha channel expressed as decimal 0 - 1 */
         Math.ceil(parseFloat(channels[3]) * 255).toString(16)
 
+    if (alpha === '0') alpha = '00'
+
     channels.pop()
   }
 

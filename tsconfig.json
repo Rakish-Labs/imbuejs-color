@@ -1,7 +1,8 @@
 {
-  "include": ["src"],
+  "include": ["src", "tests/isValidHex.test.ts", "tests/rgbToHex.test.ts"],
   "exclude": ["tests"],
   "compilerOptions": {
+    "target": "ES5",
     "lib": ["ES2020","dom"],
     "moduleResolution": "node",
     "module": "ES2020",
@@ -9,5 +10,14 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "sourceMap": true
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "commonjs"
+    },
+    "include": [
+      "tests/**/*"
+    ]
   },
 }

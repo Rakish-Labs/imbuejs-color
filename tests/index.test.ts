@@ -9,7 +9,14 @@ colorClass('maintains the originally passed value', () => {
   const expected = '#000000'
   const color = new Color(expected)
 
-  assert.equal(color.originalValue, '#000000')
+  assert.equal(color.toString(), '#000000')
+})
+
+colorClass('accepts an instance of itself as argument', () => {
+  const color = new Color('#000000')
+  const anotherColor = new Color(color)
+
+  assert.equal(anotherColor.hex().toString(), '#000000')
 })
 
 colorClass('converts hexadecimal to rgb', () => {
@@ -31,6 +38,15 @@ colorClass('converts hexadecimal to rgb', () => {
 
   expectedValues.forEach((expected: string, index: number) => {
     assert.equal(new Color(inputs[index]).rgb().toString(), expected)
+  })
+})
+
+colorClass('hex to hex expands shorthand', () => {
+  const inputs = ['#123', '#112233', '#11223380']
+  const expectedValues = ['#112233', '#112233', '#11223380']
+
+  expectedValues.forEach((expected: string, index: number) => {
+    assert.equal(new Color(inputs[index]).hex().toString(), expected)
   })
 })
 
@@ -91,8 +107,13 @@ colorClass('converts hsl to rgb(a)', () => {
     'hsl(340 59.8% 64.9%)',
     'hsla(0, 0%, 0%, .5)',
     'hsla(0, 0%, 0%, 50%)',
+    'hsla(0deg, 0%, 0%, 50%)',
     'hsl(3.141592653589793rad, 100.0%, 74.1%)', // π radians === 180º
     'hsl(3.141592653589793rad 100.0% 74.1%)', // π radians === 180º
+    'hsl(61 100.0% 74.1%)',
+    'hsl(121 100.0% 74.1%)',
+    'hsl(241 100.0% 74.1%)',
+    'hsl(1turn 100% 90%)',
   ]
 
   const expectedValues = [
@@ -104,8 +125,13 @@ colorClass('converts hsl to rgb(a)', () => {
     'rgb(219, 111, 147)',
     'rgba(0, 0, 0, .5)',
     'rgba(0, 0, 0, 50%)',
+    'rgba(0, 0, 0, 50%)',
     'rgb(122, 255, 255)',
     'rgb(122, 255, 255)',
+    'rgb(252, 255, 122)',
+    'rgb(122, 255, 125)',
+    'rgb(125, 122, 255)',
+    'rgb(255, 204, 204)',
   ]
 
   expectedValues.forEach((expected: string, index: number) => {
@@ -133,7 +159,7 @@ colorClass('converts hsl to hex', () => {
     'hsl(340 59.8% 64.9%)',
     'hsla(0, 0%, 0%, .5)',
     'hsl(3.141592653589793rad, 100.0%, 74.1%)', // π radians === 180º
-    'hsl(3.141592653589793rad 100.0% 74.1%)', // π radians === 180º
+    'hsl(.5turn 100.0% 74.1%)', // π radians === 180º
   ]
 
   const expectedValues = [
@@ -226,5 +252,89 @@ colorClass('validates rgb', () => {
     assert.throws(instantiateColorWithInvalidRGB)
   })
 })
+
+colorClass('has a red getter that returns the red channel', () => {
+  assert.equal(255, new Color('#ff0000').red)
+  assert.equal(0, new Color('#000000').red)
+  assert.equal(128, new Color('#800000').red)
+})
+
+colorClass(
+  "has a red setter that sets the class' red channel and sets its model to RGB",
+  () => {
+    const color = new Color('#ff000080')
+    assert.equal(255, color.red)
+
+    color.red = 0
+
+    assert.equal(0, color.red)
+    assert.equal(0, color.green)
+    assert.equal(0, color.blue)
+    assert.equal(0.5, color.alpha)
+  },
+)
+
+colorClass('has a green getter that returns the green channel', () => {
+  assert.equal(255, new Color('#00ff00').green)
+  assert.equal(0, new Color('#000000').green)
+  assert.equal(128, new Color('#008000').green)
+})
+
+colorClass(
+  "has a green setter that sets the class' green channel and sets its model to RGB",
+  () => {
+    const color = new Color('#00ff0080')
+    assert.equal(255, color.green)
+
+    color.green = 0
+
+    assert.equal(0, color.red)
+    assert.equal(0, color.green)
+    assert.equal(0, color.blue)
+    assert.equal(0.5, color.alpha)
+  },
+)
+
+colorClass('has a blue getter that returns the blue channel', () => {
+  assert.equal(255, new Color('#0000ff').blue)
+  assert.equal(0, new Color('#000000').blue)
+  assert.equal(128, new Color('#000080').blue)
+})
+
+colorClass(
+  "has a blue setter that sets the class' blue channel and sets its model to RGB",
+  () => {
+    const color = new Color('#0000ff80')
+    assert.equal(255, color.blue)
+
+    color.blue = 0
+
+    assert.equal(0, color.red)
+    assert.equal(0, color.green)
+    assert.equal(0, color.blue)
+    assert.equal(0.5, color.alpha)
+  },
+)
+
+colorClass('has an alpha getter that returns the alpha channel', () => {
+  assert.equal(1.0, new Color('#0000ffff').alpha)
+  assert.equal(0, new Color('#00000000').alpha)
+  assert.equal(0.5, new Color('#00008080').alpha)
+})
+
+colorClass(
+  "has an alpha setter that sets the class' alpha channel and sets its model to RGB",
+  () => {
+    const color = new Color('#0000ff80')
+    assert.equal(0.5, color.alpha)
+
+    color.alpha = 0
+
+    assert.equal(0, color.red)
+    assert.equal(0, color.green)
+    assert.equal(255, color.blue)
+    assert.equal(0, color.alpha)
+  },
+)
 
 colorClass.run()
