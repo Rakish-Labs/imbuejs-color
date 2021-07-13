@@ -11,6 +11,7 @@
     "clean": "rimraf pkg",
     "test": "uvu -r ts-node/register tests",
     "test:coverage": "c8 npm run test",
+    "codecov": "codecov",
     "test:watch": "nodemon -L -e js,ts,json --config nodemon.test.json --exec 'clear && npm run test:coverage'",
     "declarations": "tsc --outDir ./pkg --declaration",
     "build": "npm run clean && rollup -c rollup.config.js && pnpm declarations",
@@ -28,6 +29,7 @@
   "license": "MIT",
   "devDependencies": {
     "c8": "^7.7.3",
+    "codecov": "^3.8.2",
     "nodemon": "^2.0.12",
     "rimraf": "^3.0.2",
     "rollup": "^2.53.1",
