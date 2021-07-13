@@ -10,24 +10,20 @@ on:
       - 'v*.*.*'
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-    - name: Set env
-      with:
-        node-version: 14
-        
-    - run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      
-    - run: |
-        echo $RELEASE_VERSION
-        echo ${{ env.RELEASE_VERSION }}
-    - run: npm test
-    - run: npm build
-    - run: npm prepare
+      - uses: actions/checkout@v2
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Test Env
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
+
+      - run: npm test
+      - run: npm build
+      - run: npm prepare
 
 #   publish-npm:
 #     needs: build
