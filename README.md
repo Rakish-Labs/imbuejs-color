@@ -16,6 +16,7 @@ yarn add @imbuejs/color
 ```
 npm i @imbuejs/color
 ```
+This library exists to adopt the ES Modules standard and packages its JavaScript in ESM exclusively. If you are using a legacy module loading system such as CommonJS (`require` and `module.exports`) or UMD, check out [`color`](https://www.npmjs.com/package/color)--it inspired this library, and it's awesome!
 
 ## Usage
 ```
@@ -194,6 +195,9 @@ Don't see a color space transformation you need? Don't see a visual color transf
 
 ## Issues
 Something not working the way you expect? Have a usage question? [Open up an issue.](https://github.com/Rakish-Labs/imbuejs-color/issues/new?assignees=&labels=&template=bug_report.md&title=)
+
+## AMA
+Have a question about how to use the library? 
 
 ## Roadmap
 In planned order of implementation based on browser support:
