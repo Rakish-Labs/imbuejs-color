@@ -8,6 +8,9 @@
   <img src="https://codecov.io/gh/Rakish-Labs/imbuejs-color/branch/main/graph/badge.svg?token=DkYYLE5oCL"/>
 </a>
 
+![Build](https://github.com/Rakish-Labs/imbuejs-color/actions/workflows/ci.yml/badge.svg)
+
+
 ### An ESM color manipulation library for ESM bundlers like Snowpack and Vite with both functional and object-oriented APIs
 
 ## Installation
