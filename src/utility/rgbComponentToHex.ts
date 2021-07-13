@@ -1,4 +1,4 @@
-import { RGBComponent } from '../types/rgbComponent'
+import { RGBComponent } from '../types/RGBComponent'
 
 export const rgbComponentToHex = (rgbComponent: RGBComponent) => {
   const hexValue = parseInt(rgbComponent).toString(16)

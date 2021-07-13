@@ -3,9 +3,9 @@ import * as assert from 'uvu/assert'
 
 import { rgbToHex } from '../src/utility/rgbToHex'
 
-const module = suite('rgbToHex')
+const func = suite('rgbToHex')
 
-module('throws if an RGB component is invalid', () => {
+func('throws if an RGB component is invalid', () => {
   const invalid = [
     'rgba(-1, 0, 0, 1)',
     'rgba(256, 0, 0, 1)',
@@ -21,4 +21,4 @@ module('throws if an RGB component is invalid', () => {
   })
 })
 
-module.run()
+func.run()

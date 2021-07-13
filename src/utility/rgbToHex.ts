@@ -1,7 +1,7 @@
-import { RGBComponent } from '../types/rgbComponent'
 import { getRGBChannels } from './getRGBChannels'
 import { rgbComponentToHex } from './rgbComponentToHex'
 import { validateRGBComponent } from './validateRGBComponent'
+import type { RGBComponent } from '../types/RGBComponent'
 
 export const rgbToHex = (rgb: string) => {
   let alpha: string = ''

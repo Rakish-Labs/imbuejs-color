@@ -1,6 +1,6 @@
-import { RGBComponent } from '../types/rgbComponent'
 import { cssColorKeywords } from './cssColorKeywords'
 import { rgbComponentToHex } from './rgbComponentToHex'
+import type { RGBComponent } from '../types/RGBComponent'
 
 export const keywordToHex = (keyword: string): string => {
   const rgbValues = cssColorKeywords[keyword]

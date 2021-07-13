@@ -3,9 +3,9 @@ import * as assert from 'uvu/assert'
 
 import { isValidHex } from '../src/utility/isValidHex'
 
-const module = suite('isValidHex')
+const func = suite('isValidHex')
 
-module('throws if invalid', () => {
+func('throws if invalid', () => {
   const invalid = [
     '',
     '123',
@@ -27,4 +27,4 @@ module('throws if invalid', () => {
   })
 })
 
-module.run()
+func.run()
