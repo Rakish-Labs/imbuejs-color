@@ -1,6 +1,6 @@
-<div style="text-align: center;">
-<img align="center" src="./docs/ImbueColorLogo.svg">
-</div>
+<p align="center">
+  <img align="center" src="./docs/ImbueColorLogo.svg">
+</p>
 
 # @imbuejs/color
 ## An ESM color manipulation library for ESM bundlers like Snowpack and Vite with both functional and object-oriented APIs
