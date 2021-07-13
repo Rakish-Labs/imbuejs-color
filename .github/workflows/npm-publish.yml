@@ -22,18 +22,11 @@ jobs:
         node-version: 14
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       
-    - name: Test Release Version Env
     - run: |
         echo $RELEASE_VERSION
         echo ${{ env.RELEASE_VERSION }}
-    
-    - name: Test
     - run: npm test
-    
-    - name: Build
     - run: npm build
-    
-    - name: Prepare
     - run: npm prepare
 
 #   publish-npm:
