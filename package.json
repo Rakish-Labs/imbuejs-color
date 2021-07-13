@@ -11,7 +11,7 @@
     "clean": "rimraf pkg",
     "test": "uvu -r ts-node/register tests",
     "test:coverage": "c8 npm run test",
-    "codecov": "c8 npm run test | ./node_modules/.bin/codecov --pipe",
+    "codecov": "c8 npm run test | ./node_modules/.bin/codecov --pipe --disable=gcov",
     "test:watch": "nodemon -L -e js,ts,json --config nodemon.test.json --exec 'clear && npm run test:coverage'",
     "declarations": "tsc --outDir ./pkg --declaration",
     "build": "npm run clean && rollup -c rollup.config.js && pnpm declarations",
