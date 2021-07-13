@@ -1,9 +1,10 @@
 {
-  "name": "imbue-color",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@imbuejs/color",
+  "version": "0.0.3",
+  "description": "ESM Color Transformation Library",
   "exports": {
-    ".": "./pkg/index.js"
+    ".": "./index.js",
+    "./package.json": "./package.json"
   },
   "type": "module",
   "types": "pkg/index.d.ts",
@@ -13,11 +14,19 @@
     "test:ci": "node --experimental-loader esbuild-node-loader ./node_modules/uvu/bin.js src .test.js",
     "test:watch": "nodemon -L -e js,ts,json --config nodemon.test.json --exec 'clear && npm run test'",
     "declarations": "tsc --outDir ./pkg --declaration",
-    "build": "npm run clean && rollup -c rollup.config.js && pnpm declarations"
+    "build": "npm run clean && rollup -c rollup.config.js && pnpm declarations",
+    "bump": "node scripts/bump.cjs",
+    "prepare": "node scripts/prepare.cjs",
+    "patch": "npm run bump && npm run build && npm run prepare && cp pkg.json pkg/package.json"
   },
-  "keywords": [],
+  "keywords": [
+    "color",
+    "colour",
+    "esm",
+    "ES Modules"
+  ],
   "author": "jeffDevelops",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@istanbuljs/esm-loader-hook": "^0.1.2",
     "c8": "^7.7.3",

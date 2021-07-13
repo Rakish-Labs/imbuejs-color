@@ -1,4 +1,3 @@
-import type { ColorModel } from './types/ColorModel'
 import { cssColorKeywords } from './utility/cssColorKeywords'
 import { hexToRGB } from './utility/hexToRGB'
 import { keywordToRGB } from './utility/keywordToRGB'
@@ -8,15 +7,13 @@ import { hslToRGB } from './utility/hslToRGB'
 import { keywordToHex } from './utility/keywordToHex'
 import { isValidHSL } from './utility/isValidHSL'
 import { isValidRGB } from './utility/isValidRGB'
+import { getRGBChannels } from './utility/getRGBChannels'
+import { expandHexShorthand } from './utility/expandHexShorthand'
+import type { ColorModel } from './types/ColorModel'
 
-interface IColor {
-  originalValue: string
-  model: ColorModel
-}
-
-export default class Color implements IColor {
-  public originalValue: string
-  public model: ColorModel
+export default class Color {
+  private originalValue: string
+  private model: ColorModel
 
   constructor(colorString: string)
   constructor(color: Color)
@@ -26,9 +23,7 @@ export default class Color implements IColor {
 
       this.model = (() => {
         if (arg.startsWith('#')) {
-          if (isValidHex(arg)) {
-            return 'Hex'
-          }
+          if (isValidHex(arg)) return 'Hex'
         }
         const prefix = arg.substring(0, 3)
 
@@ -38,12 +33,12 @@ export default class Color implements IColor {
             throw new Error(`Invalid HSL(A) color format. Received ${arg}`)
           case 'rgb':
             if (isValidRGB(arg)) return 'RGB'
-            throw new Error(`Invalid RGB(A) color format. Received $`)
+            throw new Error(`Invalid RGB(A) color format. Received ${arg}`)
           default:
             if (cssColorKeywords[arg]) return 'Keyword'
 
             throw new Error(
-              `Unknown color format. Expected RGB(A), HSL(A), Lab, HWB, Hexidecimal, or CSS Color Value. Received: ${arg}`,
+              `Unknown color format. Expected RGB(A), HSL(A), Hexidecimal, or CSS Color Value. Received: ${arg}`,
             )
         }
       })()
@@ -71,7 +66,7 @@ export default class Color implements IColor {
       case 'RGB':
         return new Color(rgbToHex(this.originalValue))
       case 'Hex':
-        return new Color(this.originalValue)
+        return new Color(`#${expandHexShorthand(this.originalValue)}`)
       case 'Keyword':
         return new Color(keywordToHex(this.originalValue))
       case 'HSL':
@@ -81,5 +76,84 @@ export default class Color implements IColor {
 
   toString() {
     return this.originalValue
+  }
+
+  get red() {
+    const [r] = getRGBChannels(
+      new Color(this.originalValue).rgb().originalValue,
+    )
+    return parseInt(r)
+  }
+
+  set red(newValue: number) {
+    const [_, g, b, a] = getRGBChannels(
+      new Color(this.originalValue).rgb().originalValue,
+    )
+
+    this.model = 'RGB'
+    this.originalValue = `rgb${a ? 'a' : ''}(${[
+      newValue,
+      g,
+      b,
+      ...(a ? [a] : []) /** don't include alpha, if not defined */,
+    ].join(', ')})`
+  }
+
+  get green() {
+    const [_, g] = getRGBChannels(
+      new Color(this.originalValue).rgb().originalValue,
+    )
+    return parseInt(g)
+  }
+
+  set green(newValue: number) {
+    const [r, _, b, a] = getRGBChannels(
+      new Color(this.originalValue).rgb().originalValue,
+    )
+
+    this.model = 'RGB'
+    this.originalValue = `rgb${a ? 'a' : ''}(${[
+      r,
+      newValue,
+      b,
+      ...(a ? [a] : []) /** don't include alpha, if not defined */,
+    ].join(', ')})`
+  }
+
+  get blue() {
+    const [_, __, b] = getRGBChannels(
+      new Color(this.originalValue).rgb().originalValue,
+    )
+    return parseInt(b)
+  }
+
+  set blue(newValue: number) {
+    const [r, g, _, a] = getRGBChannels(
+      new Color(this.originalValue).rgb().originalValue,
+    )
+
+    this.model = 'RGB'
+    this.originalValue = `rgb${a ? 'a' : ''}(${[
+      r,
+      g,
+      newValue,
+      ...(a ? [a] : []) /** don't include alpha, if not defined */,
+    ].join(', ')})`
+  }
+
+  get alpha() {
+    const [_, __, ___, a] = getRGBChannels(
+      new Color(this.originalValue).rgb().originalValue,
+    )
+    return parseFloat(a ?? '1')
+  }
+
+  set alpha(newValue: number) {
+    const [r, g, b, _] = getRGBChannels(
+      new Color(this.originalValue).rgb().originalValue,
+    )
+
+    this.model = 'RGB'
+    this.originalValue = `rgba(${[r, g, b, newValue].join(', ')})`
   }
 }
