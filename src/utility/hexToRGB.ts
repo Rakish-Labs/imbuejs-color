@@ -14,12 +14,10 @@ export const hexToRGB = (hex: string) => {
       (parseInt(result[4], 16) / 255).toString(),
     ).toPrecision(2)
 
-    return result
-      ? `rgba(${parseInt(result[1], 16)}, ${parseInt(
-          result[2],
-          16,
-        )}, ${parseInt(result[3], 16)}, ${alpha})`
-      : null
+    return `rgba(${parseInt(result[1], 16)}, ${parseInt(
+      result[2],
+      16,
+    )}, ${parseInt(result[3], 16)}, ${alpha})`
 
     /** 6-digit */
   } else {

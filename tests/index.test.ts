@@ -262,8 +262,11 @@ colorClass('has a red getter that returns the red channel', () => {
 colorClass(
   "has a red setter that sets the class' red channel and sets its model to RGB",
   () => {
+    /** With alpha */
     const color = new Color('#ff000080')
     assert.equal(255, color.red)
+    assert.equal('#ff000080', color['originalValue'])
+    assert.equal('Hex', color['model'])
 
     color.red = 0
 
@@ -271,6 +274,25 @@ colorClass(
     assert.equal(0, color.green)
     assert.equal(0, color.blue)
     assert.equal(0.5, color.alpha)
+
+    assert.equal('rgba(0, 0, 0, 0.50)', color['originalValue'])
+    assert.equal('RGB', color['model'])
+
+    /* Without alpha */
+    const withoutAlpha = new Color('#ff0000')
+    assert.equal(255, withoutAlpha.red)
+    assert.equal('#ff0000', withoutAlpha['originalValue'])
+    assert.equal('Hex', withoutAlpha['model'])
+
+    withoutAlpha.red = 0
+
+    assert.equal(0, withoutAlpha.red)
+    assert.equal(0, withoutAlpha.green)
+    assert.equal(0, withoutAlpha.blue)
+    assert.equal(1, withoutAlpha.alpha)
+
+    assert.equal('rgb(0, 0, 0)', withoutAlpha['originalValue'])
+    assert.equal('RGB', withoutAlpha['model'])
   },
 )
 
@@ -283,8 +305,11 @@ colorClass('has a green getter that returns the green channel', () => {
 colorClass(
   "has a green setter that sets the class' green channel and sets its model to RGB",
   () => {
+    /** With alpha */
     const color = new Color('#00ff0080')
     assert.equal(255, color.green)
+    assert.equal('#00ff0080', color['originalValue'])
+    assert.equal('Hex', color['model'])
 
     color.green = 0
 
@@ -292,6 +317,25 @@ colorClass(
     assert.equal(0, color.green)
     assert.equal(0, color.blue)
     assert.equal(0.5, color.alpha)
+
+    assert.equal('rgba(0, 0, 0, 0.50)', color['originalValue'])
+    assert.equal('RGB', color['model'])
+
+    /* Without alpha */
+    const withoutAlpha = new Color('#00ff00')
+    assert.equal(255, withoutAlpha.green)
+    assert.equal('#00ff00', withoutAlpha['originalValue'])
+    assert.equal('Hex', withoutAlpha['model'])
+
+    withoutAlpha.green = 0
+
+    assert.equal(0, withoutAlpha.red)
+    assert.equal(0, withoutAlpha.green)
+    assert.equal(0, withoutAlpha.blue)
+    assert.equal(1, withoutAlpha.alpha)
+
+    assert.equal('rgb(0, 0, 0)', withoutAlpha['originalValue'])
+    assert.equal('RGB', withoutAlpha['model'])
   },
 )
 
@@ -304,6 +348,7 @@ colorClass('has a blue getter that returns the blue channel', () => {
 colorClass(
   "has a blue setter that sets the class' blue channel and sets its model to RGB",
   () => {
+    /** With alpha */
     const color = new Color('#0000ff80')
     assert.equal(255, color.blue)
 
@@ -313,6 +358,22 @@ colorClass(
     assert.equal(0, color.green)
     assert.equal(0, color.blue)
     assert.equal(0.5, color.alpha)
+
+    /* Without alpha */
+    const withoutAlpha = new Color('#0000ff')
+    assert.equal(255, withoutAlpha.blue)
+    assert.equal('#0000ff', withoutAlpha['originalValue'])
+    assert.equal('Hex', withoutAlpha['model'])
+
+    withoutAlpha.blue = 0
+
+    assert.equal(0, withoutAlpha.red)
+    assert.equal(0, withoutAlpha.green)
+    assert.equal(0, withoutAlpha.blue)
+    assert.equal(1, withoutAlpha.alpha)
+
+    assert.equal('rgb(0, 0, 0)', withoutAlpha['originalValue'])
+    assert.equal('RGB', withoutAlpha['model'])
   },
 )
 
@@ -327,6 +388,8 @@ colorClass(
   () => {
     const color = new Color('#0000ff80')
     assert.equal(0.5, color.alpha)
+    assert.equal('Hex', color['model'])
+    assert.equal('#0000ff80', color['originalValue'])
 
     color.alpha = 0
 
@@ -334,6 +397,9 @@ colorClass(
     assert.equal(0, color.green)
     assert.equal(255, color.blue)
     assert.equal(0, color.alpha)
+
+    assert.equal('RGB', color['model'])
+    assert.equal('rgba(0, 0, 255, 0)', color['originalValue'])
   },
 )
 
