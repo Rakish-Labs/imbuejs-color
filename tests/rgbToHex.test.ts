@@ -12,7 +12,7 @@ func('throws if an RGB component is invalid', () => {
     'rgba(0, -1, 0, 1)',
     'rgba(0, 256, 0, 1)',
     'rgba(0, 0, -1, 1)',
-    'rgba(0, 0, 256, 1)',
+    'rgba(0, 0, 256, 0)',
   ]
 
   invalid.forEach(value => {
