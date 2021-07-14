@@ -47,11 +47,7 @@ jobs:
           node-version: 14
 
       - run: npm run test
-      - run: npm run  build
-      - run: npm run bump -- --version=${{ env.RELEASE_VERSION }}
-      - run: npm run prepare
-      
-      - run: cd pkg && ls -a && cat package.json
+      - run: npm run build
 
   publish-npm:
     needs: pre-publish
@@ -62,7 +58,8 @@ jobs:
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
-      - run: ls -a
-      - run: cd pkg && npm publish
+      - run: npm run bump -- --version=${{ env.RELEASE_VERSION }}
+      - run: npm run prepare
+      - run: cd pkg && ls -a && cat package.json && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
