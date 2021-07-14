@@ -4,6 +4,7 @@ specifiers:
   c8: ^7.7.3
   codecov: ^3.8.2
   esbuild: ^0.12.15
+  minimist: ^1.2.5
   nodemon: ^2.0.12
   rimraf: ^3.0.2
   rollup: ^2.53.1
@@ -16,6 +17,7 @@ devDependencies:
   c8: 7.7.3
   codecov: 3.8.2
   esbuild: 0.12.15
+  minimist: 1.2.5
   nodemon: 2.0.12
   rimraf: 3.0.2
   rollup: 2.53.1

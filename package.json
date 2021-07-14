@@ -1,6 +1,6 @@
 {
-  "name": "@imbuejs/color",
   "version": "0.0.3",
+  "name": "@imbuejs/color",
   "description": "ESM Color Transformation Library",
   "exports": {
     ".": "./index.js",
@@ -16,8 +16,7 @@
     "declarations": "tsc --outDir ./pkg --declaration",
     "build": "npm run clean && rollup -c rollup.config.js && pnpm declarations",
     "bump": "node scripts/bump.cjs",
-    "prepare": "node scripts/prepare.cjs",
-    "patch": "npm run bump && npm run build && npm run prepare && cp pkg.json pkg/package.json"
+    "prepare": "npm run build && node scripts/prepare.cjs && cp pkg.json pkg/package.json"
   },
   "keywords": [
     "color",
@@ -31,6 +30,7 @@
     "c8": "^7.7.3",
     "codecov": "^3.8.2",
     "esbuild": "^0.12.15",
+    "minimist": "^1.2.5",
     "nodemon": "^2.0.12",
     "rimraf": "^3.0.2",
     "rollup": "^2.53.1",
