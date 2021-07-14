@@ -51,9 +51,7 @@ jobs:
       - run: npm run bump -- --version=${{ env.RELEASE_VERSION }}
       - run: npm run prepare
       
-      - run: cd pkg
-      - run: ls -a
-      - run: cat package.json
+      - run: cd pkg && ls -a && cat package.json
 
 #   publish-npm:
 #     needs: build
