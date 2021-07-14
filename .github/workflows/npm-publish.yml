@@ -47,10 +47,10 @@ jobs:
         with:
           node-version: 14
 
-      - run: npm test
-      - run: npm build
-      - run: npm bump -- --version=${{ env.RELEASE_VERSION }}
-      - run: npm prepare
+      - run: npm run test
+      - run: npm run  build
+      - run: npm run bump -- --version=${{ env.RELEASE_VERSION }}
+      - run: npm run prepare
       
       - run: cd pkg
       - run: ls -a
