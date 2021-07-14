@@ -14,16 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-        
-      - name: Test Env
-        run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
     
-
       - name: Cache pnpm modules
         uses: actions/cache@v2
         env:
@@ -45,24 +36,19 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
+          
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - run: |
+          echo $RELEASE_VERSION
+          echo Publishing version ${{ env.RELEASE_VERSION }}
 
       - run: npm run test
-      - run: npm run  build
+      - run: npm run build
       - run: npm run bump -- --version=${{ env.RELEASE_VERSION }}
       - run: npm run prepare
-      
-      - run: cd pkg && ls -a && cat package.json
-
-  publish-npm:
-    needs: pre-publish
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14
-          registry-url: https://registry.npmjs.org/
-      - run: ls -a
-      - run: cd pkg && npm publish
+      - run: cd pkg && ls -a && cat package.json && npm publish
         env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
