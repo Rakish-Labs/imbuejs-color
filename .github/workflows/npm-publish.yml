@@ -10,7 +10,7 @@ on:
       - 'v*.*.*'
 
 jobs:
-  test:
+  pre-publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -53,16 +53,15 @@ jobs:
       
       - run: cd pkg && ls -a && cat package.json
 
-#   publish-npm:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v2
-#         with:
-#           node-version: 14
-#           registry-url: https://registry.npmjs.org/
-#       - run: npm 
-#       - run: npm publish
-#         env:
-#           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+  publish-npm:
+    needs: pre-publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+      - run: cd pkg && npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
