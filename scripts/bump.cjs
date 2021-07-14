@@ -1,37 +1,19 @@
-#!/usr/bin/env node
-
 const { readFileSync, writeFileSync } = require('fs')
 const { join } = require('path')
-const yargs = require('yargs')
-
-let argVersion
-
-yargs
-  .scriptName('Bump npm version')
-  .usage('$0 <cmd> [args]')
-  .command(
-    'Bump npm version',
-    yargs => {
-      yargs.positional('version', {
-        usage: '--version 1.0.0',
-        type: 'string',
-        describe:
-          'The semver version number to publish; if no version specified, bumping the patch number is default behavior',
-      })
-    },
-    function (argv) {
-      argVersion = argv.version
-    },
-  )
-  .help().argv
+const argv = require('minimist')(process.argv.slice(2))
 
 const targetPath = join(__dirname, '../package.json')
-
 const pkg = JSON.parse(readFileSync(targetPath))
 
-const version = argVersion ? argVersion : pkg.version
+let bump
+if (argv.version === undefined) {
+  console.log('No version specified, bumping patch by 1')
+  const [major, minor, patch] = pkg.version.split('.')
+  bump = [major, minor, (parseInt(patch) + 1).toString()].join('.')
+} else {
+  console.log(`Bumping to version ${argv.version}`)
+  bump = argv.version
+}
 
-const [major, minor, patch] = version.split('.')
-pkg.version = [major, minor, (parseInt(patch) + 1).toString()].join('.')
-
+pkg.version = bump
 writeFileSync(targetPath, JSON.stringify(pkg, null, 2))
