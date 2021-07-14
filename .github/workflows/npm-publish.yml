@@ -21,9 +21,15 @@ jobs:
           echo $RELEASE_VERSION
           echo ${{ env.RELEASE_VERSION }}
 
+      - run: npm install
       - run: npm test
       - run: npm build
+      - run: npm bump -- --version=${{ env.RELEASE_VERSION }}
       - run: npm prepare
+      
+      - run: cd pkg
+      - run: ls -a
+      - run: echo package.json
 
 #   publish-npm:
 #     needs: build
