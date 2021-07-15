@@ -85,7 +85,7 @@ new Color('hsl(.5turn, 0%, 100%)).hex().toString() // '#FFFFFF'
 ```
 
 ##### From HSLA
-Supports both percentge and decimal representations for alpha channel.
+Supports both percentage and decimal representations for alpha channel.
 - [Browser support for #RRGGBBAA is limited](https://caniuse.com/css-rrggbbaa)
 - `hsla()` does not support whitespace `' '` separators; only `', '` may be used
 ```
@@ -128,7 +128,7 @@ new Color('hsl(.5turn, 0%, 100%)).rgb().toString() // 'rgb(255, 255, 255)'
 ```
 
 ##### From HSLA
-Supports both percentge and decimal representations for alpha channel.
+Supports both percentage and decimal representations for alpha channel.
 - `hsla()` does not support whitespace `' '` separators; only `', '` may be used
 ```
 new Color('hsla(0, 0%, 100%, .5)').rgb().toString() // 'rgba(255, 255, 255, .5)'
@@ -140,6 +140,44 @@ The original value passed will be returned.
 ```
 new Color('rgb(0, 128, 255)').rgb().toString() // 'rgb(000, 128, 255)'
 new Color('rgba(0, 128, 255, .5)').rgb().toString() // 'rgba(0, 128, 255, .5)'
+```
+
+#### To HSL(A)
+If no alpha channel is inferred from the incoming color, it is left off and `hsl()` is used; conversely, `hsla()` is used and alpha is denoted with decimal notation (0...1).
+
+##### From CSS Keyword
+[CSS keyword strings](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#color_keywords) are case-sensitive.
+```
+new Color('rebeccapurple').hsl().toString() // 'hsl(270, 50%, 40%)'
+```
+
+##### From Hex
+Supports 3-digit shorthand hex codes (`'#123'`), 6-digit hex codes (`'#112233'`), and 8-digit hex codes with alpha (`'#11223300'`).
+```
+new Color('#639').hsl().toString() // 'hsl(270, 50%, 40%)'
+new Color('#663399').hsl().toString() // 'hsl(270, 50%, 40%)'
+new Color('#66339980').hsl().toString() // 'hsla(270, 50%, 40%, 0.5)'
+```
+
+##### From HSL
+Returns the original value passed.
+
+Supports both comma `', '` and whitespace `' '` separators. Hue may be specified in degrees (with either no unit, or `deg`), radians (`rad`), or turns (`turn`). Saturation and lightness must be expressed as percentages.
+
+Supports both percentage and decimal representations for alpha channel.
+- `hsla()` does not support whitespace `' '` separators; only `', '` may be used
+```
+new Color('hsl(270, 50%, 40%)').hsl().toString() // 'hsl(270, 50%, 40%)'
+new Color('hsla(270deg, 50%, 40%, 1)').hsl().toString() // 'hsla(270deg, 50%, 40%, 1)'
+new Color('hsla(270, 50%, 40%, 0.5)').hsl().toString() // 'hsla(270, 50%, 40%, 0.5)'
+```
+
+##### From RGB(A)
+If no alpha channel is inferred from the incoming color, it is left off and `rgb()` is used; conversely, `rgba()` is used and alpha is denoted with decimal notation (0...1).
+
+```
+new Color('rgb(102, 51, 183)').hsl().toString() // 'hsl(263, 56%, 46%)'
+new Color('rgba(102, 51, 183, .5)').hsl().toString() // 'hsla(263, 56%, 46%, 0.5)'
 ```
 
 ### Visual Color Transformations
