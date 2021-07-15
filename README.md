@@ -249,8 +249,8 @@ Have a question about how to use the library? This is a safe space! No question 
 ## Roadmap
 In planned order of implementation based on browser support:
 
-- [ ] Color Space Transformations: 
-  - [ ] `Color.hsl()` [(ubiquitous browser support)](https://caniuse.com/?search=hsla)
+- [x] Color Space Transformations: 
+  - [x] `Color.hsl()` [(ubiquitous browser support)](https://caniuse.com/?search=hsla)
 
 - [ ] Visual Color Transformations:
   - [ ] `Color.hue('<value><deg|rad|turn>')`, to apply a new hue channel value to the current `Color` and return a new one in hsl(a)
