@@ -179,15 +179,15 @@ colorClass('converts hsl to hex', () => {
 colorClass('hsl to hsl returns original value', () => {
   const inputs = [
     'hsl(270, 50%, 40%)',
-    'hsl(270, 50%, 40%)',
     'hsla(270, 50%, 40%, 1)',
+    'hsla(270deg, 50%, 40%, 1)',
     'hsla(270, 50%, 40%, 0.5)',
   ]
 
   const expectedOutputs = [
     'hsl(270, 50%, 40%)',
-    'hsl(270, 50%, 40%)',
     'hsla(270, 50%, 40%, 1)',
+    'hsla(270deg, 50%, 40%, 1)',
     'hsla(270, 50%, 40%, 0.5)',
   ]
 
