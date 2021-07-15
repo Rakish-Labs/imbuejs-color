@@ -10,6 +10,7 @@
   "scripts": {
     "clean": "rimraf pkg",
     "test": "uvu -r ts-node/register tests",
+    "test:file": "nodemon -L -e js,ts,json --config nodemon.test.json --exec node -r ts-node/register --",
     "test:coverage": "c8 npm run test",
     "codecov": "npm run test:coverage && c8 report --reporter=text-lcov > coverage/tests.lcov && ./node_modules/.bin/codecov --disable=gcov",
     "test:watch": "nodemon -L -e js,ts,json --config nodemon.test.json --exec 'clear && npm run test:coverage'",
@@ -38,5 +39,12 @@
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
     "uvu": "^0.5.1"
+  },
+  "readme": "https://github.com/Rakish-Labs/imbuejs-color/blob/main/README.md",
+  "homepage": "https://github.com/Rakish-Labs/imbuejs-color",
+  "funding": {
+    "type" : "GitHub Sponsors",
+    "url" : "https://github.com/sponsors/Rakish-Labs"
   }
+
 }

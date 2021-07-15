@@ -64,16 +64,13 @@ colorClass('converts rgb to hexadecimal', () => {
   ]
 
   const expectedValues = [
-    /** 6 Digit Hex */
     '#000000',
     '#000000',
     '#FFFFFF',
     '#FFFFFF',
-    /** Hex with alpha */
     '#DD2D4ABB',
-    '#C8FFF014',
-    '#C8FFF014',
-    /** Hex with 3-digit shorthand */
+    '#C8FFF033',
+    '#C8FFF033',
     '#112233',
   ]
 
@@ -176,6 +173,79 @@ colorClass('converts hsl to hex', () => {
 
   expectedValues.forEach((expected: string, index: number) => {
     assert.equal(new Color(inputs[index]).hex().toString(), expected)
+  })
+})
+
+colorClass('hsl to hsl returns original value', () => {
+  const inputs = [
+    'hsl(270, 50%, 40%)',
+    'hsl(270, 50%, 40%)',
+    'hsla(270, 50%, 40%, 1)',
+    'hsla(270, 50%, 40%, 0.5)',
+  ]
+
+  const expectedOutputs = [
+    'hsl(270, 50%, 40%)',
+    'hsl(270, 50%, 40%)',
+    'hsla(270, 50%, 40%, 1)',
+    'hsla(270, 50%, 40%, 0.5)',
+  ]
+
+  expectedOutputs.forEach((value: string, index: number) => {
+    assert.equal(value, new Color(inputs[index]).hsl().toString())
+  })
+})
+
+colorClass('converts keyword to hsl', () => {
+  const inputs = ['palevioletred', 'rebeccapurple']
+  const expectedOutputs = ['hsl(340, 60%, 65%)', 'hsl(270, 50%, 40%)']
+
+  expectedOutputs.forEach((value: string, index: number) => {
+    assert.equal(value, new Color(inputs[index]).hsl().toString())
+  })
+})
+
+colorClass('converts hex to hsl', () => {
+  const inputs = ['#639', '#663399', '#663399ff', '#66339980']
+  const expectedOutputs = [
+    'hsl(270, 50%, 40%)',
+    'hsl(270, 50%, 40%)',
+    'hsla(270, 50%, 40%, 1)',
+    'hsla(270, 50%, 40%, 0.5)',
+  ]
+
+  expectedOutputs.forEach((value: string, index: number) => {
+    assert.equal(new Color(inputs[index]).hsl().toString(), value)
+  })
+})
+
+colorClass('converts rgb to hsl', () => {
+  const inputs = [
+    'rgb(102, 51, 183)',
+    'rgb(102 51 183)',
+    'rgb(40% 20% 71.71%)',
+    'rgba(102, 51, 183, .5)',
+    'rgba(102, 51, 183, 50%)',
+    'rgb(0, 255, 0)',
+    'rgb(254, 255, 1)',
+    'rgb(0, 0, 0)',
+    'rgb(255 255 255)',
+  ]
+
+  const expectedOutputs = [
+    'hsl(263, 56%, 46%)',
+    'hsl(263, 56%, 46%)',
+    'hsl(263, 56%, 46%)',
+    'hsla(263, 56%, 46%, 0.5)',
+    'hsla(263, 56%, 46%, 0.5)',
+    'hsl(120, 100%, 50%)',
+    'hsl(60, 100%, 50%)',
+    'hsl(0, 0%, 0%)',
+    'hsl(0, 0%, 100%)',
+  ]
+
+  expectedOutputs.forEach((value: string, index: number) => {
+    assert.equal(new Color(inputs[index]).hsl().toString(), value)
   })
 })
 

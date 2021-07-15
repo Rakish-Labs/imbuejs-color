@@ -9,13 +9,7 @@ export const rgbToHex = (rgb: string) => {
 
   /** Alpha */
   if (channels[3]) {
-    alpha = channels[3].endsWith('%')
-      ? /** Alpha channel expressed as percentage */
-        Math.ceil(
-          parseFloat(channels[3].substring(0, channels[3].length)),
-        ).toString(16)
-      : /** Alpha channel expressed as decimal 0 - 1 */
-        Math.ceil(parseFloat(channels[3]) * 255).toString(16)
+    alpha = Math.ceil(parseFloat(channels[3]) * 255).toString(16)
 
     if (alpha === '0') alpha = '00'
 
