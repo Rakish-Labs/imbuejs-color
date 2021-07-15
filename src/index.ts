@@ -1,14 +1,18 @@
-import { cssColorKeywords } from './utility/cssColorKeywords'
 import { hexToRGB } from './utility/hexToRGB'
-import { keywordToRGB } from './utility/keywordToRGB'
-import { rgbToHex } from './utility/rgbToHex'
-import { isValidHex } from './utility/isValidHex'
 import { hslToRGB } from './utility/hslToRGB'
+import { keywordToRGB } from './utility/keywordToRGB'
 import { keywordToHex } from './utility/keywordToHex'
+import { rgbToHex } from './utility/rgbToHex'
+import { rgbToHSL } from './utility/rgbToHSL'
+
+import { cssColorKeywords } from './utility/cssColorKeywords'
+import { expandHexShorthand } from './utility/expandHexShorthand'
+import { getRGBChannels } from './utility/getRGBChannels'
+
+import { isValidHex } from './utility/isValidHex'
 import { isValidHSL } from './utility/isValidHSL'
 import { isValidRGB } from './utility/isValidRGB'
-import { getRGBChannels } from './utility/getRGBChannels'
-import { expandHexShorthand } from './utility/expandHexShorthand'
+
 import type { ColorModel } from './types/ColorModel'
 
 export default class Color {
@@ -71,6 +75,19 @@ export default class Color {
         return new Color(keywordToHex(this.originalValue))
       case 'HSL':
         return new Color(this.originalValue).rgb().hex()
+    }
+  }
+
+  hsl(): Color {
+    switch (this.model) {
+      case 'RGB':
+        return new Color(rgbToHSL(this.originalValue))
+      case 'Keyword':
+        return new Color(new Color(this.originalValue).rgb()).hsl()
+      case 'Hex':
+        return new Color(new Color(this.originalValue).rgb()).hsl()
+      case 'HSL':
+        return new Color(this.originalValue)
     }
   }
 
