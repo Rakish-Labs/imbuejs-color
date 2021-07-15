@@ -271,7 +271,7 @@ In planned order of implementation based on browser support:
   - [ ] `Color.rotate()`
 
 - [ ] Color Space Transformations: 
-  - [ ] `Color.hwb()` [(ubiquitous browser support)](https://caniuse.com/?search=hwb)
+  - [ ] `Color.hwb()` [(currently Safari only)](https://caniuse.com/?search=hwb)
   - [ ] `Color.lab()` [(currently Safari only)](https://caniuse.com/?search=lab%20color)
   - [ ] `Color.lch()` [(currently Safari only)](https://caniuse.com/?search=lch%20color)
   - [ ] `Color.cmyk()` (no browser support)
