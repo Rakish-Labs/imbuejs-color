@@ -191,7 +191,7 @@ color.red = 0
 
 color.toString() // 'rgb(0, 0, 0)'
 
-const hslBlack = new Color(color).hsl().toString() // 'hsl()'
+const hslBlack = new Color(color).hsl().toString() // 'hsl(0, 0%, 0%)'
 ```
 When the color space is inferrable from the setter, as in the above example in which `red` is a channel of `rgb()`, the `Color` class' color space is updated. When it cannot be inferred, such as with `alpha` which is present in multiple color spaces, `rgb()` is assumed; additional color space transformations can be made from there to transform the setter-transformed color to the desired color space.
 
